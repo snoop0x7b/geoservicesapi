@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>geoservicesapi by ranesr</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>geoservicesapi</h1>
+        <p>Java Client for using geo-services using Yelp, Mapquest APIs.</p>
+
+        <p class="view"><a href="https://github.com/ranesr/geoservicesapi">View the Project on GitHub <small>ranesr/geoservicesapi</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/ranesr/geoservicesapi/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ranesr/geoservicesapi/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ranesr/geoservicesapi">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a name="java-client-for-using-places-search-service-from-yelp-and-directions-and-location-services-from-mapquest-apis" class="anchor" href="#java-client-for-using-places-search-service-from-yelp-and-directions-and-location-services-from-mapquest-apis"><span class="octicon octicon-link"></span></a>JAVA Client for using places search service from Yelp and directions and location services from MapQuest APIs</h2>
+
+<p>This JAVA Client can help you to request data from different APIs such as Yelp API - Places Services, and MapQuest API - Directions, Location Services.</p>
+
+<h2>
+<a name="motivation" class="anchor" href="#motivation"><span class="octicon octicon-link"></span></a>Motivation</h2>
+
+<p>While working on one of the projects, I developed this and thought sharing it with you all. Maybe someone will need it.</p>
+
+<p>Some web apps may require this for finding all the places around a location. And this library can be directly used for doing this just by adding it to your code. You can also create REST API for your own application.</p>
+
+<h2>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<h3>
+<a name="places-service" class="anchor" href="#places-service"><span class="octicon octicon-link"></span></a>'Places Service'</h3>
+
+<p>PlacesServices is a class for consuming places services using Yelp Places API and MapQuest Geo-coding API.</p>
+
+<p>It will show all the places according the search term stated in imported Yelp.java.</p>
+
+<div class="highlight highlight-java"><pre><span class="c1">//Initialize the service using keys given by Yelp and MapQuest APIs</span>
+<span class="c1">//Import Yelp.java</span>
+
+<span class="n">String</span> <span class="n">consumerKey</span> <span class="o">=</span> <span class="s">"YOUR YELP CONSUMER KEY"</span><span class="o">;</span>
+<span class="n">String</span> <span class="n">consumerSecret</span> <span class="o">=</span> <span class="s">"YOUR YELP CONSUMER SECRET"</span><span class="o">;</span>
+<span class="n">String</span> <span class="n">token</span> <span class="o">=</span> <span class="s">"YOUR YELP TOKEN"</span><span class="o">;</span>
+<span class="n">String</span> <span class="n">tokenSecret</span> <span class="o">=</span> <span class="s">"YOUR YELP TOKEN SECRET"</span><span class="o">;</span>
+<span class="n">String</span> <span class="n">mapquestKey</span> <span class="o">=</span> <span class="s">"YOUR YELP MAPQUEST KEY"</span>
+
+<span class="n">PlacesServices</span> <span class="n">service</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">PlacesServices</span><span class="o">(</span><span class="n">consumerKey</span><span class="o">,</span> <span class="n">consumerSecret</span><span class="o">,</span> <span class="n">token</span><span class="o">,</span> <span class="n">tokenSecret</span><span class="o">,</span> <span class="n">mapquestKey</span><span class="o">);</span>
+
+<span class="n">String</span> <span class="n">lat</span> <span class="o">=</span> <span class="s">"32.780140"</span><span class="o">;</span>
+<span class="n">String</span> <span class="n">lng</span> <span class="o">=</span> <span class="s">"-96.800451"</span>
+<span class="n">JSONObject</span> <span class="n">venues</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getVenues</span><span class="o">(</span><span class="n">lat</span><span class="o">,</span> <span class="n">lng</span><span class="o">);</span>
+</pre></div>
+
+<h3>
+<a name="directions-services" class="anchor" href="#directions-services"><span class="octicon octicon-link"></span></a>'Directions Services'</h3>
+
+<p>DirectionsServices is a class for consuming directions services using MapQuest Directions API.</p>
+
+<div class="highlight highlight-java"><pre><span class="c1">//Initialize the service using MapQuest API key</span>
+<span class="n">String</span> <span class="n">mapquestKey</span> <span class="o">=</span> <span class="s">"YOUR MAPQUEST KEY"</span>
+
+<span class="n">DirectionsServices</span> <span class="n">service</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">DirectionsServices</span><span class="o">(</span><span class="n">mapquestKey</span><span class="o">);</span>
+</pre></div>
+
+<p>You can get a route between two locations using the following method.</p>
+
+<div class="highlight highlight-java"><pre><span class="c1">//Source location</span>
+<span class="n">String</span> <span class="n">source</span> <span class="o">=</span> <span class="s">"32.780140,-96.800451"</span><span class="o">;</span>
+<span class="c1">//Destination location</span>
+<span class="n">String</span> <span class="n">destination</span> <span class="o">=</span> <span class="s">"30.267153,-97.743061"</span><span class="o">;</span>
+
+<span class="n">JSONObject</span> <span class="n">route</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getRoute</span><span class="o">(</span><span class="n">source</span><span class="o">,</span> <span class="n">destination</span><span class="o">);</span>
+</pre></div>
+
+<p>It can also be used to find the midway between two locations on the road(approximately).</p>
+
+<p>Instead of getRoute() method, call the following method with same arguments.</p>
+
+<div class="highlight highlight-java"><pre><span class="n">JSONObject</span> <span class="n">midpoint</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getMidpoint</span><span class="o">(</span><span class="n">source</span><span class="o">,</span> <span class="n">destination</span><span class="o">);</span>
+</pre></div>
+
+<h3>
+<a name="location-services" class="anchor" href="#location-services"><span class="octicon octicon-link"></span></a>'Location Services'</h3>
+
+<p>LocationServices is a class for consuming location services using MapQuest Geo-coding API.</p>
+
+<div class="highlight highlight-java"><pre><span class="c1">//Initialize the service using MapQuest API key</span>
+<span class="n">String</span> <span class="n">mapquestKey</span> <span class="o">=</span> <span class="s">"YOUR MAPQUEST KEY"</span>
+
+<span class="n">LocationServices</span> <span class="n">service</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">LocationServices</span><span class="o">(</span><span class="n">mapquestKey</span><span class="o">);</span>
+</pre></div>
+
+<p>You can get geo-location of an address.</p>
+
+<div class="highlight highlight-java"><pre><span class="n">String</span> <span class="n">address</span> <span class="o">=</span> <span class="s">"1500 Marilla Street, Dallas, TX, 75201"</span><span class="o">;</span>
+<span class="n">JSONObject</span> <span class="n">coordinates</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getCoordinatesUsingAddress</span><span class="o">(</span><span class="n">address</span><span class="o">);</span>
+</pre></div>
+
+<p>You can also get geo-location of an address if you know the components of the address.</p>
+
+<div class="highlight highlight-java"><pre><span class="n">String</span> <span class="n">street</span> <span class="o">=</span> <span class="s">"1500 Marilla Street"</span><span class="o">;</span>
+<span class="n">String</span> <span class="n">city</span> <span class="o">=</span> <span class="s">"Dallas"</span><span class="o">;</span>
+<span class="n">String</span> <span class="n">state</span> <span class="o">=</span> <span class="s">"TX"</span><span class="o">;</span>
+<span class="n">String</span> <span class="n">postalCode</span> <span class="o">=</span> <span class="s">"75201"</span><span class="o">;</span>
+
+<span class="n">JSONObject</span> <span class="n">coordinates</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getCoordinatesUsingComponents</span><span class="o">(</span><span class="n">street</span><span class="o">,</span> <span class="n">city</span><span class="o">,</span> <span class="n">state</span><span class="o">,</span> <span class="n">postalCode</span><span class="o">);</span>
+</pre></div>
+
+<p>You can get the address of a location using its geo-coordinates.</p>
+
+<div class="highlight highlight-java"><pre><span class="n">String</span> <span class="n">lat</span> <span class="o">=</span> <span class="s">"32.777333"</span><span class="o">;</span>
+<span class="n">String</span> <span class="n">lng</span> <span class="o">=</span> <span class="s">"-96.797090"</span>
+
+<span class="n">JSONObject</span> <span class="n">location</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(</span><span class="n">lat</span><span class="o">,</span> <span class="n">lng</span><span class="o">);</span>
+</pre></div>
+
+<h2>
+<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h2>
+
+<p><a href="https://github.com/ranesr" class="user-mention">@ranesr</a></p>
+
+<p><a href="https://gist.github.com/jxson/1784669">README Template</a> by <a href="https://github.com/jxson" class="user-mention">@jxson</a></p>
+
+<h2>
+<a name="copyright-and-license" class="anchor" href="#copyright-and-license"><span class="octicon octicon-link"></span></a>Copyright and License</h2>
+
+<p>Copyright (C) 2014 <a href="https://github.com/ranesr" class="user-mention">@ranesr</a></p>
+
+<p><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></p>
+
+<p>Contact</p>
+
+<p>If you want to suggest anything, please contact me at <a href="mailto:%20saurabhrrane@gmail.com">saurabhrrane@gmail.com</a>.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/ranesr">ranesr</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-43007500-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
